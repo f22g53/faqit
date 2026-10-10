@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { faqs } from '../data/plugin'
 
 export default function FaqSection() {
-  const [openIndex, setOpenIndex] = useState(0)
+  const [openIndex, setOpenIndex] = useState(-1)
 
   return (
     <section className="section section--light" id="faq">

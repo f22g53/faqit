@@ -35,10 +35,18 @@ The app runs on port 3000. Vite dev server binds 0.0.0.0 with live reload.
 - No secrets required — the app runs entirely on the frontend.
 - The `.base44/environment.json` records `secrets: []` (none needed).
 
+## Hero layout
+The hero is **only** the TV image (`.hero` → `public/images/hero.png`). All copy, badges and the
+two glow buttons live in the `.hero-intro` section directly below it. `hero.png` was processed to
+make its baked-in light checkerboard background transparent (RGBA), so the TV composites cleanly
+onto the dark page background — keep it transparent if the image is ever replaced.
+
 ## Verifying it works
 - `curl -s -o /dev/null -w '%{http_code}' http://localhost:3000/` → 200
-- Hero shows two glow buttons; moving the pointer over a button changes the track light and the
-  glow opacity (edge glow follows the cursor).
-- FAQ accordion opens one item at a time.
-- Mobile (<980px): hamburger opens a right-side drawer, closes on overlay tap.
+- Hero shows only the TV image; the two glow buttons sit in the section below it. Moving the
+  pointer over a button changes the track light and the glow opacity (edge glow follows cursor).
+- FAQ accordion: all items start closed; opening one closes the others.
+- Mobile (<980px): hamburger opens a right-side drawer, closes on overlay tap. The closed drawer
+  must be fully off-screen (`translateX(105%)` + `visibility: hidden`) — anchoring it with
+  `right: 0` in RTL means a *negative* translate would slide it back INTO view.
 - No horizontal overflow at 360px or desktop widths.

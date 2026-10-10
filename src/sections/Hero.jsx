@@ -5,9 +5,19 @@ const scrollTo = (sel) => () => document.querySelector(sel)?.scrollIntoView({ be
 
 export default function Hero() {
   return (
-    <section className="hero" id="top">
-      <div className="container hero-grid">
-        <div className="hero-copy">
+    <>
+      <section className="hero" id="top" aria-label="نمای افزونه">
+        <img
+          className="hero-tv"
+          src="/images/hero.png"
+          alt="نمای صفحهٔ تماشاگاه روی نمایشگر با اسلایدر ویدیوها و پخش در مودال"
+          width="1600"
+          height="900"
+        />
+      </section>
+
+      <section className="hero-intro">
+        <div className="container">
           <span className="eyebrow">افزونهٔ فارسی ویدیو برای وردپرس</span>
           <h1>
             ویدیوهای آپارات و یوتیوب را به <em>صفحهٔ تماشاگاه</em> وردپرس بیاورید
@@ -28,16 +38,7 @@ export default function Hero() {
             ))}
           </ul>
         </div>
-
-        <div className="hero-visual">
-          <img
-            src="/images/hero.png"
-            alt="نمای صفحهٔ تماشاگاه با اسلایدر ویدیوها و پخش در مودال"
-            width="1200"
-            height="800"
-          />
-        </div>
-      </div>
-    </section>
+      </section>
+    </>
   )
 }

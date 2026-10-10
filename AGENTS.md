@@ -4,7 +4,7 @@
 This is a Vite + React real estate website (Horizon Properties). It was rebuilt from a WordPress plugin scaffold into a modern SPA.
 
 ## Tech Stack
-- **Framework:** Vite 5 + React 18
+- **Framework:** Vite 6 + React 18
 - **Routing:** React Router DOM v6
 - **Styling:** Plain CSS with CSS variables (design system in `src/index.css`)
 - **No external CSS framework** — all styles are hand-crafted for the premium aesthetic

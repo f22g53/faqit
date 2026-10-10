@@ -1,37 +1,42 @@
-import { Link } from 'react-router-dom'
-import { ArrowRight } from '../components/Icons'
-import { heroImage } from '../data/properties'
+import CursorEdgeGlowButton from '../components/CursorEdgeGlowButton'
+import { site, heroBadges } from '../data/plugin'
+
+const scrollTo = (sel) => () => document.querySelector(sel)?.scrollIntoView({ behavior: 'smooth' })
 
 export default function Hero() {
   return (
-    <section className="hero" aria-label="Hero">
-      <div className="hero-bg hero-img-animate">
-        <img src={heroImage} alt="Luxury modern villa with infinity pool at dusk" />
-      </div>
-      <div className="hero-overlay" />
-      <div className="hero-content">
-        <h1 className="hero-animate">
-          Discover Exceptional
-          <br />
-          Homes &amp; Investments
-        </h1>
-        <p className="hero-animate hero-animate-delay-1">
-          Premium properties in prime locations. Find your dream home
-          or the perfect investment with confidence.
-        </p>
-        <div className="hero-actions hero-animate hero-animate-delay-2">
-          <Link to="/properties" className="btn btn--gold btn--lg">
-            Browse Properties
-            <ArrowRight size={18} />
-          </Link>
-          <Link to="/contact" className="btn btn--outline btn--lg">
-            Contact Us
-          </Link>
+    <section className="hero" id="top">
+      <div className="container hero-grid">
+        <div className="hero-copy">
+          <span className="eyebrow">افزونهٔ فارسی ویدیو برای وردپرس</span>
+          <h1>
+            ویدیوهای آپارات و یوتیوب را به <em>صفحهٔ تماشاگاه</em> وردپرس بیاورید
+          </h1>
+          <p className="hero-sub">
+            فقط لینک ویدیوها را وارد کنید تا عنوان و کاور خودکار شناسایی شود و صفحه‌ای زیبا با اسلایدر،
+            فیلتر منبع و پخش در مودال بسازید — بدون نیاز به API.
+          </p>
+
+          <div className="hero-actions">
+            <CursorEdgeGlowButton onClick={scrollTo(site.demoHref)}>مشاهده دمو</CursorEdgeGlowButton>
+            <CursorEdgeGlowButton onClick={scrollTo(site.purchaseHref)}>خرید افزونه</CursorEdgeGlowButton>
+          </div>
+
+          <ul className="hero-badges">
+            {heroBadges.map((badge) => (
+              <li key={badge}>{badge}</li>
+            ))}
+          </ul>
         </div>
-      </div>
-      <div className="hero-scroll hero-animate hero-animate-delay-3">
-        <span>Scroll</span>
-        <div className="hero-scroll-line" />
+
+        <div className="hero-visual">
+          <img
+            src="/images/hero.png"
+            alt="نمای صفحهٔ تماشاگاه با اسلایدر ویدیوها و پخش در مودال"
+            width="1200"
+            height="800"
+          />
+        </div>
       </div>
     </section>
   )

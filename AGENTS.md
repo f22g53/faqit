@@ -1,13 +1,17 @@
-# Horizon Properties — Base44 Dev Environment
+# تماشاگاه — Base44 Dev Environment
 
 ## Overview
-This is a Vite + React real estate website (Horizon Properties). It was rebuilt from a WordPress plugin scaffold into a modern SPA.
+Persian, right-to-left (RTL) landing page for the **تماشاگاه (Tamashagah)** WordPress video
+plugin (Aparat/YouTube → a styled video page). The original WordPress plugin scaffold files
+(`faqit.php`, `src/block.json`, `src/edit.js`, …) are left untouched and unused; the running app
+is a standalone Vite + React SPA that presents the plugin.
 
 ## Tech Stack
-- **Framework:** Vite 6 + React 18
-- **Routing:** React Router DOM v6
-- **Styling:** Plain CSS with CSS variables (design system in `src/index.css`)
-- **No external CSS framework** — all styles are hand-crafted for the premium aesthetic
+- **Framework:** Vite 6 + React 18 (no router — single landing page)
+- **Styling:** Plain CSS with CSS variables (`src/index.css`), plus a dedicated stylesheet for the
+  glow button (`src/components/CursorEdgeGlowButton.css`)
+- **Font:** Estedad, self-hosted from `public/fonts/` via `@font-face` in `src/index.css`
+- **Direction:** `<html lang="fa" dir="rtl">` in `index.html`
 
 ## Setup
 ```bash
@@ -16,14 +20,25 @@ docker compose -f docker-compose.base44.yml up -d --build
 The app runs on port 3000. Vite dev server binds 0.0.0.0 with live reload.
 
 ## Project Structure
-- `src/data/properties.js` — all property data, team, services, site info
-- `src/components/` — reusable components (Header, Footer, PropertyCard, PropertyCarousel, etc.)
-- `src/sections/` — homepage sections (Hero, WhoWeAre, FeaturedProperties, etc.)
-- `src/pages/` — routed pages (Home, Properties, PropertyDetail, About, Services, Team, Contact)
-- `src/index.css` — complete design system with CSS variables
+- `src/data/plugin.js` — all Persian content (features, steps, panels, FAQ, nav, site info)
+- `src/components/` — `SiteHeader`, `SiteFooter`, `CursorEdgeGlowButton`, `PluginIcons`
+- `src/sections/` — landing sections: `Hero`, `Features`, `HowItWorks`, `Panel`, `FaqSection`
+- `src/index.css` — full RTL design system (dark navy + cyan accent)
+- `public/plugin/` — real plugin assets extracted from the shipped zip (logo, ad-network logos)
+- `public/images/` — plugin UI screenshots used in the hero and panel showcase
+- `public/fonts/` — Estedad woff2 files
 
 ## Key Notes
-- Property data is structured for easy future database connection (each property has id, slug, structured fields)
-- Images use Unsplash URLs with responsive sizing parameters
-- No secrets required — the app runs entirely on the frontend
-- The `.base44/environment.json` records `secrets: []` (none needed)
+- **Buttons:** the page uses exactly **two** `CursorEdgeGlowButton` instances in the hero
+  («مشاهده دمو» and «خرید افزونه»). The component is the provided cursor-tracking glow button
+  ported from Tailwind arbitrary classes to plain CSS; its physics constants live in the JSX.
+- No secrets required — the app runs entirely on the frontend.
+- The `.base44/environment.json` records `secrets: []` (none needed).
+
+## Verifying it works
+- `curl -s -o /dev/null -w '%{http_code}' http://localhost:3000/` → 200
+- Hero shows two glow buttons; moving the pointer over a button changes the track light and the
+  glow opacity (edge glow follows the cursor).
+- FAQ accordion opens one item at a time.
+- Mobile (<980px): hamburger opens a right-side drawer, closes on overlay tap.
+- No horizontal overflow at 360px or desktop widths.
